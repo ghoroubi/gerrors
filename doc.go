@@ -1,6 +1,6 @@
 package gerrors
 
-// go:generate
+//go:generate
 // Copyright 2020 Nima Ghoroubi. All rights reserved.
 // Use of this source code is free by importing in your projects
 

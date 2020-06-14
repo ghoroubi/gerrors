@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// WrapError
+// WrapError ...
 // This method takes an error which is your service-level error
 // And some external errors as interfaces and wraps your error
 // With external ones.
@@ -21,7 +21,7 @@ func WrapError(appLevelError error, externalErrors ...interface{}) error {
 	return fmt.Errorf("%w - %v", appLevelError, externalErrors)
 }
 
-// HandleGracefully
+// HandleGracefully ...
 // This method takes the error and debug mode of your service
 // And decides according to that mode.
 // If debug mode enabled, it will return full wrapped error

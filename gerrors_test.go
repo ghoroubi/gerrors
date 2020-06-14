@@ -8,16 +8,13 @@ import (
 
 var (
 	ErrValidationError = errors.New("invalid data provided")
-)
-
-var (
-	wrongJsonStr = `
+	wrongJSONStr       = `
 {
 	"id":"1",
 	"username":"admin"
 }
 `
-	trueJsonStr = `
+	trueJSONStr = `
 {
 	"id":1,
 	"username":"admin"
@@ -36,14 +33,14 @@ func TestWrapError(t *testing.T) {
 	u := new(user)
 
 	// False
-	err := json.Unmarshal([]byte(wrongJsonStr), &u)
+	err := json.Unmarshal([]byte(wrongJSONStr), &u)
 	err = WrapError(ErrValidationError, err)
 	if !errors.Is(err, ErrValidationError) {
 		t.FailNow()
 	}
 
 	// True
-	err = json.Unmarshal([]byte(trueJsonStr), &u)
+	err = json.Unmarshal([]byte(trueJSONStr), &u)
 	err = WrapError(ErrValidationError, err)
 	if errors.Is(err, ErrValidationError) {
 		t.FailNow()
@@ -54,7 +51,7 @@ func TestHandleGracefully(t *testing.T) {
 	u := new(user)
 
 	// False
-	err := json.Unmarshal([]byte(wrongJsonStr), &u)
+	err := json.Unmarshal([]byte(wrongJSONStr), &u)
 
 	err = WrapError(ErrValidationError, err)
 	if !errors.Is(err, ErrValidationError) {
