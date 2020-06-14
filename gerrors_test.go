@@ -1,9 +1,11 @@
-package gerrors
+package gerrors_test
 
 import (
 	"encoding/json"
 	"errors"
 	"testing"
+
+	"github.com/ghoroubi/gerrors"
 )
 
 var (
@@ -34,14 +36,14 @@ func TestWrapError(t *testing.T) {
 
 	// False
 	err := json.Unmarshal([]byte(wrongJSONStr), &u)
-	err = WrapError(ErrValidationError, err)
+	err = gerrors.WrapError(ErrValidationError, err)
 	if !errors.Is(err, ErrValidationError) {
 		t.FailNow()
 	}
 
 	// True
 	err = json.Unmarshal([]byte(trueJSONStr), &u)
-	err = WrapError(ErrValidationError, err)
+	err = gerrors.WrapError(ErrValidationError, err)
 	if errors.Is(err, ErrValidationError) {
 		t.FailNow()
 	}
@@ -53,16 +55,16 @@ func TestHandleGracefully(t *testing.T) {
 	// False
 	err := json.Unmarshal([]byte(wrongJSONStr), &u)
 
-	err = WrapError(ErrValidationError, err)
+	err = gerrors.WrapError(ErrValidationError, err)
 	if !errors.Is(err, ErrValidationError) {
 		t.FailNow()
 	}
 
 	// Error in production mode
-	productionErr := HandleGracefully(err, false)
+	productionErr := gerrors.HandleGracefully(err, false)
 
 	// Error in development/debug mode
-	developErr := HandleGracefully(err, true)
+	developErr := gerrors.HandleGracefully(err, true)
 
 	if !errors.As(ErrValidationError, &productionErr) {
 		t.FailNow()
