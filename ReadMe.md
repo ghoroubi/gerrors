@@ -8,5 +8,6 @@ go get github.com/ghoroubi/gerrors
 
 ```go
 package main
+
 // Will be add here soon
 ```
