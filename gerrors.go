@@ -12,12 +12,12 @@ import (
 // View the examples to deep understanding
 func WrapError(appLevelError error, externalErrors ...interface{}) error {
 	// Checking for nil and just wrap only if err isn't nil
-	for _, e := range externalErrors {
+	/*for _, e := range externalErrors {
 		if e == nil {
 			return nil
 		}
 	}
-
+*/
 	return fmt.Errorf("%w - %v", appLevelError, externalErrors)
 }
 
